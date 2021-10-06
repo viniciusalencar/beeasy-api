@@ -14,7 +14,6 @@ class UserController {
   async store(req, res) {
     const { name, email, password, confirmPassword } = req.body;
 
-
     const validationSchema = yup.object().shape({
       name: yup.string().required('Campo obrigatório'),
       email: yup.string().email().required('Campo obrigatório'),
@@ -36,7 +35,7 @@ class UserController {
       });
     };
 
-    const userExist = await User.findOne({ email: email });
+    const userExist = await User.findOne({ email });
     if (userExist) {
       return res.status(400).json({
         error: true,
